@@ -1,2 +1,5 @@
+from math import floor
+
+
 def calculate_mass(x):
-    return 8
+    return floor(x / 3) - 2
