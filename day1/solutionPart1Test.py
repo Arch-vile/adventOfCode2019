@@ -1,6 +1,6 @@
 import unittest
 
-from solutionPart1 import calculate_mass
+from day1.solutionPart1 import calculate_mass
 
 
 class MyTestCase(unittest.TestCase):
