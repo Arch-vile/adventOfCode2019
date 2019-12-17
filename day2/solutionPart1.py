@@ -1,3 +1,17 @@
 
 def run_program(program):
-    return [2, 0, 0, 0, 99]
+
+    for index in range(0,len(program),4):
+        print("index")
+        print(index)
+        op_code = program[index]
+        if op_code == 99:
+            return program
+        term1_index = program[index+1]
+        term2_index = program[index+2]
+        store_index = program[index+3]
+        print("store")
+        print(store_index)
+        program[store_index] = program[term1_index] + program[term2_index]
+
+    return program
