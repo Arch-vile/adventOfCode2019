@@ -1,6 +1,6 @@
 import unittest
 
-from solution import calculate_mass
+from solutionStep1 import calculate_mass
 
 
 class MyTestCase(unittest.TestCase):
