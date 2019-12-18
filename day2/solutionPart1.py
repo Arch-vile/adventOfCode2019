@@ -1,3 +1,5 @@
+import sys
+
 
 def calc(left, right, op_code):
     switch = {
@@ -22,3 +24,16 @@ def run_program(program):
             op_code)
 
     return program
+
+
+def process_input(input_file):
+    f = open(input_file)
+    values = f.readline().split(",")
+    program = [int(x) for x in values]
+    program[1] = 12
+    program[2] = 2
+    print(run_program(program)[0])
+
+
+if __name__ == "__main__":
+    process_input(sys.argv[1])
