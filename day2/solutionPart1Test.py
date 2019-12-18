@@ -18,10 +18,16 @@ class MyTestCase(unittest.TestCase):
             run_program([1, 1, 2, 0, 99])
         )
 
-    def test_single_multiple_sum(self):
+    def test_multiple_sum(self):
         self.assertEqual(
             [2, 3, 0, 0, 1, 0, 4, 1, 99],
             run_program([1, 0, 0, 0, 1, 0, 4, 1, 99])
+        )
+
+    def test_multiplication_and_sum(self):
+        self.assertEqual(
+            [4, 5, 4, 0, 1, 0, 4, 1, 99],
+            run_program([2, 2, 4, 0, 1, 0, 4, 1, 99])
         )
 
 if __name__ == '__main__':
