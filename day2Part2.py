@@ -1,6 +1,6 @@
 import sys
 
-from day2.day2Part1 import readInput, run_program
+from day2Part1 import readInput, run_program
 
 
 def gravityAssist(file):
