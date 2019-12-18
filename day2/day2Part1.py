@@ -27,12 +27,17 @@ def run_program(memory):
 
 
 def process_input(input_file):
-    f = open(input_file)
-    values = f.readline().split(",")
-    program = [int(x) for x in values]
+    program = readInput(input_file)
     program[1] = 12
     program[2] = 2
     print(run_program(program)[0])
+
+
+def readInput(input_file):
+    f = open(input_file)
+    values = f.readline().split(",")
+    program = [int(x) for x in values]
+    return program
 
 
 if __name__ == "__main__":
