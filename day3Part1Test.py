@@ -26,6 +26,11 @@ class MyTestCase(unittest.TestCase):
             [(1, 0), (1, 0)], calculate_steps("R2")
         )
 
+    def test_step_conversion_UP(self):
+        self.assertEqual(
+            [(0, 1), (0, 1), (0, 1)], calculate_steps("U3")
+        )
+
 
 if __name__ == '__main__':
     unittest.main()
