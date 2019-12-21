@@ -1,7 +1,7 @@
 import re
 import unittest
 
-from day3Part1 import calculate_coordinates, calculate_steps, determine_crosspoints
+from day3Part1 import calculate_coordinates, calculate_steps, determine_crosspoints, find_smallest_distance
 
 
 class MyTestCase(unittest.TestCase):
@@ -42,6 +42,16 @@ class MyTestCase(unittest.TestCase):
             {(1, 0), (2, 5)}, determine_crosspoints(
                 [(0, 0), (1, 0), (4, 6), (2, 5)],
                 [(0, 0), (2, 5), (1, 0), (1, 2)])
+        )
+
+    def test_manhattan(self):
+        self.assertEqual(
+            9, find_smallest_distance({(4, 5)})
+        )
+
+    def test_n_manhattan(self):
+        self.assertEqual(
+            5, find_smallest_distance({(4, 5), (2, 3), (55, 21)})
         )
 
 

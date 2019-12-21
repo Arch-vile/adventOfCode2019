@@ -44,3 +44,8 @@ def determine_crosspoints(path1, path2):
     crosspoints = set(path1).intersection(path2)
     crosspoints.discard((0, 0))
     return crosspoints
+
+
+def find_smallest_distance(coordinates):
+    # map(f, iterable)
+    return min(list(map(lambda c: c[0] + c[1], coordinates)))
