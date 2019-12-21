@@ -11,6 +11,8 @@ def calculate_steps(step):
     switch = {
         "R": lambda x: (1, 0),
         "U": lambda x: (0, 1),
+        "L": lambda x: (-1, 0),
+        "D": lambda x: (0, -1),
     }
 
     direction_step = switch.get(direction)

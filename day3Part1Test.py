@@ -11,12 +11,15 @@ class MyTestCase(unittest.TestCase):
             (3, 5)[1], (3, 5)[1]
         )
 
-
     def test_one_step(self):
         self.assertEqual(
             [(0, 0), (1, 0), (2, 0)], calculate_coordinates(["R2"])
         )
 
+    def test_n_steps(self):
+        self.assertEqual(
+            [(0, 0), (1, 0), (2, 0), (2, 1), (2, 2), (1, 2), (0, 2), (-1, 2), (-1, 1), (-1, 0), (-1, -1)], calculate_coordinates(["R2", "U2", "L3", "D3"])
+        )
 
     def test_step_conversion(self):
         self.assertEqual(
