@@ -38,3 +38,9 @@ def calculate_coordinates(path):
 
 def flatten(foo):
     return list(chain.from_iterable(foo))
+
+
+def determine_crosspoints(path1, path2):
+    crosspoints = set(path1).intersection(path2)
+    crosspoints.discard((0, 0))
+    return crosspoints
