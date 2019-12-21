@@ -1,4 +1,6 @@
 import re
+from functools import reduce
+from itertools import chain
 
 
 def calculate_steps(step):
@@ -15,7 +17,22 @@ def calculate_steps(step):
     return list(map(direction_step, range(amount)))
 
 
-def calculate_coordinates(path):
-    map(calculate_steps, path)
+def calc_next_coord(coordinates, next_step):
+    # do magic
+    x_coord = coordinates[-1][0] + next_step[0]
+    y_coord = coordinates[-1][1] + next_step[1]
+    coordinates.append((x_coord, y_coord))
+    return coordinates
 
-    return calculate_steps()
+
+def calculate_coordinates(path):
+    steps = flatten(map(calculate_steps, path))
+
+    # (1, 0), (1, 0), (0, 1)
+    # (1, 0), (2, 0), (2, 1)
+
+    return list(reduce(calc_next_coord, steps, [(0, 0)]))
+
+
+def flatten(foo):
+    return list(chain.from_iterable(foo))
