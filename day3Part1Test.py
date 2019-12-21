@@ -37,6 +37,13 @@ class MyTestCase(unittest.TestCase):
             {(1, 0)}, determine_crosspoints([(0, 0), (1, 0)], [(0, 0), (1, 0)])
         )
 
+    def test_n_crospoints(self):
+        self.assertEqual(
+            {(1, 0), (2, 5)}, determine_crosspoints(
+                [(0, 0), (1, 0), (4, 6), (2, 5)],
+                [(0, 0), (2, 5), (1, 0), (1, 2)])
+        )
+
 
 if __name__ == '__main__':
     unittest.main()
