@@ -40,8 +40,8 @@ def flatten(foo):
     return list(chain.from_iterable(foo))
 
 
-def determine_crosspoints(path1, path2):
-    crosspoints = set(path1).intersection(path2)
+def determine_crosspoints(path1_coordinates, path2_coordinates):
+    crosspoints = set(path1_coordinates).intersection(path2_coordinates)
     crosspoints.discard((0, 0))
     return crosspoints
 
@@ -49,3 +49,9 @@ def determine_crosspoints(path1, path2):
 def find_smallest_distance(coordinates):
     # map(f, iterable)
     return min(list(map(lambda c: c[0] + c[1], coordinates)))
+
+
+def find_closest_crosspoint(path1, path2):
+    path1_coords = calculate_coordinates(path1)
+    path2_coords = calculate_coordinates(path2)
+    return find_smallest_distance(determine_crosspoints(path1_coords, path2_coords))
