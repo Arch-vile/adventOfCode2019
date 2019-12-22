@@ -16,4 +16,10 @@ def check_increasing_digits(passcode):
     else:
         return False
 
-    pass
+
+def find_solution():
+    count = 0
+    for x in range(359282, 820401):
+        if check_adjacent_digits(x) & check_increasing_digits(x):
+            count += 1
+    print(count)

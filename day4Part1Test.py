@@ -1,6 +1,7 @@
 import unittest
 
-from day4Part1 import check_adjacent_digits, check_increasing_digits
+from day4Part1 import check_adjacent_digits, check_increasing_digits, \
+    find_solution
 
 
 class Day4Part1Tester(unittest.TestCase):
@@ -32,6 +33,9 @@ class Day4Part1Tester(unittest.TestCase):
         self.assertEqual(
             False, check_increasing_digits(145571)
         )
+
+    def test_solution(self):
+        find_solution()
 
     if __name__ == '__main__':
         unittest.main()
