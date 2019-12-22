@@ -1,5 +1,4 @@
 import re
-import sys
 from functools import reduce
 from itertools import chain
 
@@ -55,7 +54,8 @@ def find_smallest_distance(coordinates):
 def find_closest_crosspoint(path1, path2):
     path1_coords = calculate_coordinates(path1)
     path2_coords = calculate_coordinates(path2)
-    return find_smallest_distance(determine_crosspoints(path1_coords, path2_coords))
+    return find_smallest_distance(
+        determine_crosspoints(path1_coords, path2_coords))
 
 
 def run_program(input_file):
