@@ -13,16 +13,13 @@ class Day4Part1Tester(unittest.TestCase):
             True, check_adjacent_digits_even(12344)
         )
         self.assertEqual(
-            False, check_adjacent_digits_even(11234445)
+            True, check_adjacent_digits_even(11234445)
         )
         self.assertEqual(
-            True, check_adjacent_digits_even(22222222)
+            False, check_adjacent_digits_even(22222222)
         )
         self.assertEqual(
             False, check_adjacent_digits_even(222222222)
-        )
-        self.assertEqual(
-            True, check_adjacent_digits_even(1)
         )
 
     def test_matching(self):

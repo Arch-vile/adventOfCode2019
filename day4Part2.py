@@ -8,9 +8,9 @@ def check_adjacent_digits_even(passcode):
     regexp = r'((.)\2+)'
     matches = re.findall(regexp, code_as_string)
     for match in matches:
-        if len(match[0]) % 2 != 0:
-            return False
-    return True
+        if len(match[0]) == 2:
+            return True
+    return False
 
 
 def test_password(passcode):
