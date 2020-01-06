@@ -11,6 +11,7 @@ def calc(left, right, op_code):
 
 
 def run_program(memory):
+    memory = list(map(int, memory))
     for instruction_pointer in range(0, len(memory), 4):
         op_code = memory[instruction_pointer]
         if op_code == 99:
