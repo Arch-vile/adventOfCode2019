@@ -1,6 +1,6 @@
 import unittest
 
-from day1.solutionPart1 import calculate_mass
+from day1Part1 import calculate_mass
 
 
 class MyTestCase(unittest.TestCase):
@@ -10,7 +10,6 @@ class MyTestCase(unittest.TestCase):
 
     def test_fuel(self):
         self.assertEqual(calculate_mass(30), 8)
-
 
 
 if __name__ == '__main__':

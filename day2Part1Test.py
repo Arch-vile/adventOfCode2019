@@ -1,6 +1,6 @@
 import unittest
 
-from day2.day2Part1 import run_program
+from intcode_computer import run_program
 
 
 class MyTestCase(unittest.TestCase):
