@@ -13,7 +13,14 @@ def calc(left, right, op_code):
 def run_program(memory):
     memory = list(map(int, memory))
     for instruction_pointer in range(0, len(memory), 4):
-        op_code = memory[instruction_pointer]
+        instruction_code = memory[instruction_pointer]
+        instruction = Instruction(instruction_code)
+
+        op_code = instruction.op_code
+        # parameter_mode1 = instruction.get_parameter_mode(0)
+        # parameter_mode2 = instruction_code_parts.get_parameter_mode(1)
+        # parameter_mode3 = instruction_code_parts.get_parameter_mode(2)
+
         if op_code == 99:
             return memory
         param1_address = memory[instruction_pointer + 1]
@@ -25,6 +32,16 @@ def run_program(memory):
             op_code)
 
     return memory
+
+
+def get_value_of_last_two_digits(instruction_code):
+    last_two_digits = str(instruction_code)[-2:]
+    return int(last_two_digits)
+
+
+class Instruction:
+    def __init__(self, instruction_code):
+        self.op_code = get_value_of_last_two_digits(instruction_code)
 
 
 def process_input(input_file):

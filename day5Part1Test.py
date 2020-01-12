@@ -17,6 +17,13 @@ class MyTestCase(unittest.TestCase):
             run_program(["01", 0, 0, 0, 99])
         )
 
+    def test_parameter_mode_op_code(self):
+        self.assertEqual(
+            # Tests only op code, not paramaters, result is wrong for now
+            [2002, 0, 0, 0, 99],
+            run_program(["1001", 0, 0, 0, 99])
+        )
+
 
 if __name__ == '__main__':
     unittest.main()
