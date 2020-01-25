@@ -2,13 +2,14 @@ import sys
 
 OP_CODE_LENGTH = 2
 
-def calc(left, right, op_code):
+
+def calc(op_code, params):
     switch = {
-        1: lambda x, y: x + y,
-        2: lambda x, y: x * y,
+        1: lambda x: x[0] + x[1],
+        2: lambda x: x[0] * x[1],
     }
 
-    return switch.get(op_code)(left, right)
+    return switch.get(op_code)(params)
 
 
 def run_program(memory):
@@ -27,16 +28,16 @@ def run_program(memory):
 
         if instruction.mode2 == "POSITION":
            param2_address = memory[instruction_pointer + 2]
-           param2 = memory[param1_address]
+           param2 = memory[param2_address]
         else:
             param2 = memory[instruction_pointer + 2]
 
         param3_address = memory[instruction_pointer + 3]
 
         memory[param3_address] = calc(
-            param1,
-            param2,
-            instruction.op_code)
+            instruction.op_code,
+            [param1, param2]
+        )
 
     return memory
 
