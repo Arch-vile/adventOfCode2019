@@ -1,5 +1,6 @@
 import sys
 
+OP_CODE_LENGTH = 2
 
 def calc(left, right, op_code):
     switch = {
@@ -11,37 +12,59 @@ def calc(left, right, op_code):
 
 
 def run_program(memory):
-    memory = list(map(int, memory))
     for instruction_pointer in range(0, len(memory), 4):
         instruction_code = memory[instruction_pointer]
         instruction = Instruction(instruction_code)
 
-        op_code = instruction.op_code
-        # parameter_mode1 = instruction.get_parameter_mode(0)
-        # parameter_mode2 = instruction_code_parts.get_parameter_mode(1)
-        # parameter_mode3 = instruction_code_parts.get_parameter_mode(2)
-
-        if op_code == 99:
+        if instruction.op_code == 99:
             return memory
-        param1_address = memory[instruction_pointer + 1]
-        param2_address = memory[instruction_pointer + 2]
+
+        if instruction.mode1 == "POSITION":
+            param1_address = memory[instruction_pointer + 1]
+            param1 = memory[param1_address]
+        else:
+            param1 = memory[instruction_pointer + 1]
+
+        if instruction.mode2 == "POSITION":
+           param2_address = memory[instruction_pointer + 2]
+           param2 = memory[param1_address]
+        else:
+            param2 = memory[instruction_pointer + 2]
+
         param3_address = memory[instruction_pointer + 3]
+
         memory[param3_address] = calc(
-            memory[param1_address],
-            memory[param2_address],
-            op_code)
+            param1,
+            param2,
+            instruction.op_code)
 
     return memory
 
 
-def get_value_of_last_two_digits(instruction_code):
-    last_two_digits = str(instruction_code)[-2:]
-    return int(last_two_digits)
+def get_value_of_last_digits(instruction_code, digit_count):
+    last_digits = str(instruction_code)[-digit_count:]
+    return int(last_digits)
 
 
 class Instruction:
     def __init__(self, instruction_code):
-        self.op_code = get_value_of_last_two_digits(instruction_code)
+        self.op_code = get_value_of_last_digits(instruction_code, OP_CODE_LENGTH)
+
+        self.mode1 = self.as_parameter_mode(instruction_code, 0)
+        self.mode2 = self.as_parameter_mode(instruction_code, 1)
+
+    @staticmethod
+    def as_parameter_mode(instruction_code, index):
+        code_as_string = str(instruction_code)
+        if len(code_as_string)-OP_CODE_LENGTH > index:
+            param = str(code_as_string[-(index+OP_CODE_LENGTH+1)])
+
+            if param == "0":
+                return "POSITION"
+            else:
+                return "IMMEDIATE"
+        else:
+            return "POSITION"
 
 
 def process_input(input_file):
