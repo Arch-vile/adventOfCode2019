@@ -3,43 +3,52 @@ import sys
 OP_CODE_LENGTH = 2
 
 
-def calc(op_code, params):
+def calc(instruction, memory):
     switch = {
-        1: lambda x: x[0] + x[1],
-        2: lambda x: x[0] * x[1],
+        1: lambda inst, mem:
+            mem.read_param(inst.mode1) + mem.read_param(inst.mode2),
+        2: lambda inst, mem:
+            mem.read_param(inst.mode1) * mem.read_param(inst.mode2),
     }
 
-    return switch.get(op_code)(params)
+    value = switch.get(instruction.op_code)(instruction, memory)
+    address = memory.read_param("IMMEDIATE")
+    memory.set_value(address, value)
 
 
-def run_program(memory):
-    for instruction_pointer in range(0, len(memory), 4):
-        instruction_code = memory[instruction_pointer]
-        instruction = Instruction(instruction_code)
+class Memory:
+    def __init__(self, data1):
+        self.data = data1
+        self.pointer = 0
+
+    def next_instruction(self):
+        next_instruction = Instruction(self.data[self.pointer])
+        self.pointer = self.pointer + 1
+        return next_instruction
+
+    def set_value(self, address, value):
+        self.data[address] = value
+
+    def read_param(self, mode):
+        old_pointer = self.pointer
+        self.pointer = self.pointer + 1
+        if mode == "POSITION":
+            return self.data[self.data[old_pointer]]
+        else:
+            return self.data[old_pointer]
+
+
+def run_program(input_data):
+    memory = Memory(input_data)
+
+    while True:
+
+        instruction = memory.next_instruction()
 
         if instruction.op_code == 99:
-            return memory
+            return memory.data
 
-        if instruction.mode1 == "POSITION":
-            param1_address = memory[instruction_pointer + 1]
-            param1 = memory[param1_address]
-        else:
-            param1 = memory[instruction_pointer + 1]
-
-        if instruction.mode2 == "POSITION":
-           param2_address = memory[instruction_pointer + 2]
-           param2 = memory[param2_address]
-        else:
-            param2 = memory[instruction_pointer + 2]
-
-        param3_address = memory[instruction_pointer + 3]
-
-        memory[param3_address] = calc(
-            instruction.op_code,
-            [param1, param2]
-        )
-
-    return memory
+        calc(instruction, memory)
 
 
 def get_value_of_last_digits(instruction_code, digit_count):
@@ -69,13 +78,13 @@ class Instruction:
 
 
 def process_input(input_file):
-    program = readInput(input_file)
+    program = read_input(input_file)
     program[1] = 12
     program[2] = 2
     print(run_program(program)[0])
 
 
-def readInput(input_file):
+def read_input(input_file):
     f = open(input_file)
     values = f.readline().split(",")
     program = [int(x) for x in values]
