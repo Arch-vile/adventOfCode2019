@@ -9,6 +9,8 @@ def calc(instruction, memory):
             mem.read_param(inst.mode1) + mem.read_param(inst.mode2),
         2: lambda inst, mem:
             mem.read_param(inst.mode1) * mem.read_param(inst.mode2),
+        3: lambda inst, mem:
+            mem.program_input
     }
 
     value = switch.get(instruction.op_code)(instruction, memory)
@@ -17,9 +19,10 @@ def calc(instruction, memory):
 
 
 class Memory:
-    def __init__(self, data1):
+    def __init__(self, data1, program_input):
         self.data = data1
         self.pointer = 0
+        self.program_input = program_input
 
     def next_instruction(self):
         next_instruction = Instruction(self.data[self.pointer])
@@ -38,8 +41,8 @@ class Memory:
             return self.data[old_pointer]
 
 
-def run_program(input_data):
-    memory = Memory(input_data)
+def run_program(program, program_input=0):
+    memory = Memory(program, program_input)
 
     while True:
 

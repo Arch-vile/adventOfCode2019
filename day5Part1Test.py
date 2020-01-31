@@ -11,6 +11,12 @@ class MyTestCase(unittest.TestCase):
             run_program([1001, 0, 0, 0, 99])
         )
 
+ def test_input_reading(self):
+        self.assertEqual(
+            [1, 0, 99],
+            run_program([3, 0, 99], 1)
+        )
+
 
 if __name__ == '__main__':
     unittest.main()
