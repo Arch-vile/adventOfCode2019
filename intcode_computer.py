@@ -10,12 +10,18 @@ def calc(instruction, memory):
         2: lambda inst, mem:
             mem.read_param(inst.mode1) * mem.read_param(inst.mode2),
         3: lambda inst, mem:
-            mem.program_input
+            mem.program_input,
+        4: lambda inst, mem:
+            mem.read_param(inst.mode1)
     }
 
     value = switch.get(instruction.op_code)(instruction, memory)
-    address = memory.read_param("IMMEDIATE")
-    memory.set_value(address, value)
+
+    if instruction.op_code == 4:
+        memory.add_output(value)
+    else:
+        address = memory.read_param("IMMEDIATE")
+        memory.set_value(address, value)
 
 
 class Memory:
@@ -23,6 +29,7 @@ class Memory:
         self.data = data1
         self.pointer = 0
         self.program_input = program_input
+        self.output = []
 
     def next_instruction(self):
         next_instruction = Instruction(self.data[self.pointer])
@@ -40,6 +47,9 @@ class Memory:
         else:
             return self.data[old_pointer]
 
+    def add_output(self, value):
+        self.output.append(value)
+
 
 def run_program(program, program_input=0):
     memory = Memory(program, program_input)
@@ -49,7 +59,7 @@ def run_program(program, program_input=0):
         instruction = memory.next_instruction()
 
         if instruction.op_code == 99:
-            return memory.data
+            return [memory.data, memory.output]
 
         calc(instruction, memory)
 
