@@ -91,6 +91,7 @@ class Instruction:
 
 
 def process_input(input_file, program_input):
+    program_input = int(program_input)
     program = read_input(input_file)
     print(run_program(program, program_input)[1])
 
