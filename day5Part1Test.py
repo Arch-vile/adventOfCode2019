@@ -24,5 +24,12 @@ class MyTestCase(unittest.TestCase):
      )
 
 
+ def test_negative_numbers(self):
+        self.assertEqual(
+            [[-7, -5, -2, 0, 99], []],
+            run_program([1101, -5, -2, 0, 99])
+        )
+
+
 if __name__ == '__main__':
     unittest.main()

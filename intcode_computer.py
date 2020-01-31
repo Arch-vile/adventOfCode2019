@@ -90,11 +90,9 @@ class Instruction:
             return "POSITION"
 
 
-def process_input(input_file):
+def process_input(input_file, program_input):
     program = read_input(input_file)
-    program[1] = 12
-    program[2] = 2
-    print(run_program(program)[0])
+    print(run_program(program, program_input)[1])
 
 
 def read_input(input_file):
@@ -105,4 +103,4 @@ def read_input(input_file):
 
 
 if __name__ == "__main__":
-    process_input(sys.argv[1])
+    process_input(sys.argv[1], sys.argv[2])
