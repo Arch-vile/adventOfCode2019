@@ -45,6 +45,15 @@ def calc(instruction, memory):
         else:
             memory.set_value(address, 0)
 
+    if op_code == 8:
+        first_value = memory.read_param(instruction.mode1)
+        second_value = memory.read_param(instruction.mode2)
+        address = memory.read_param("IMMEDIATE")
+        if first_value == second_value:
+            memory.set_value(address, 1)
+        else:
+            memory.set_value(address, 0)
+
 class Memory:
     def __init__(self, data1, program_input):
         self.data = data1

@@ -47,6 +47,12 @@ class MyTestCase(unittest.TestCase):
             run_program([1107, 0, 5, 0, 99])
         )
 
+    def test_equals(self):
+        self.assertEqual(
+            [[1, 2, 2, 0, 99], []],
+            run_program([1108, 2, 2, 0, 99])
+        )
+
 
 if __name__ == '__main__':
     unittest.main()
