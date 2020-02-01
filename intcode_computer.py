@@ -30,6 +30,12 @@ def calc(instruction, memory):
         if check != 0:
             memory.set_instruction_pointer(value)
 
+    if op_code == 6:
+        check = memory.read_param(instruction.mode1)
+        value = memory.read_param(instruction.mode2)
+        if check == 0:
+            memory.set_instruction_pointer(value)
+
 
 class Memory:
     def __init__(self, data1, program_input):
