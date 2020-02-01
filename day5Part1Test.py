@@ -41,6 +41,12 @@ class MyTestCase(unittest.TestCase):
             run_program([1106, 0, 5, 1, 1, 1, 1, 2, 0, 99])
         )
 
+    def test_less_than(self):
+        self.assertEqual(
+            [[1, 0, 5, 0, 99], []],
+            run_program([1107, 0, 5, 0, 99])
+        )
+
 
 if __name__ == '__main__':
     unittest.main()
