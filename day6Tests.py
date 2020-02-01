@@ -26,6 +26,19 @@ class MyTestCase(unittest.TestCase):
             calculate_orbits(body1)
         )
 
+    def test_simple_branch(self):
+        body1 = Body()
+        body2 = Body()
+        body3 = Body()
+        body4 = Body()
+        body1.add_orbitor(body2)
+        body2.add_orbitor(body3)
+        body2.add_orbitor(body4)
+        self.assertEqual(
+            5,
+            calculate_orbits(body1)
+        )
+
 
 if __name__ == '__main__':
     unittest.main()
