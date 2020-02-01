@@ -24,6 +24,12 @@ def calc(instruction, memory):
         value = memory.read_param(instruction.mode1)
         memory.add_output(value)
 
+    if op_code == 5:
+        check = memory.read_param(instruction.mode1)
+        value = memory.read_param(instruction.mode2)
+        if check != 0:
+            memory.set_instruction_pointer(value)
+
 
 class Memory:
     def __init__(self, data1, program_input):
@@ -50,6 +56,9 @@ class Memory:
 
     def add_output(self, value):
         self.output.append(value)
+
+    def set_instruction_pointer(self, value):
+        self.pointer = value
 
 
 def run_program(program, program_input=0):
