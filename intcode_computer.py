@@ -4,24 +4,25 @@ OP_CODE_LENGTH = 2
 
 
 def calc(instruction, memory):
-    switch = {
-        1: lambda inst, mem:
-            mem.read_param(inst.mode1) + mem.read_param(inst.mode2),
-        2: lambda inst, mem:
-            mem.read_param(inst.mode1) * mem.read_param(inst.mode2),
-        3: lambda inst, mem:
-            mem.program_input,
-        4: lambda inst, mem:
-            mem.read_param(inst.mode1)
-    }
-
-    value = switch.get(instruction.op_code)(instruction, memory)
-
-    if instruction.op_code == 4:
-        memory.add_output(value)
-    else:
+    op_code = instruction.op_code
+    if op_code == 1:
+        value = memory.read_param(instruction.mode1) + memory.read_param(instruction.mode2)
         address = memory.read_param("IMMEDIATE")
         memory.set_value(address, value)
+
+    if op_code == 2:
+        value = memory.read_param(instruction.mode1) * memory.read_param(instruction.mode2)
+        address = memory.read_param("IMMEDIATE")
+        memory.set_value(address, value)
+
+    if op_code == 3:
+        value = memory.program_input
+        address = memory.read_param("IMMEDIATE")
+        memory.set_value(address, value)
+
+    if op_code == 4:
+        value = memory.read_param(instruction.mode1)
+        memory.add_output(value)
 
 
 class Memory:
