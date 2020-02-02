@@ -1,3 +1,5 @@
+import sys
+
 # find body from dict, if not present then create and return
 def get_body(dictionary, body_name):
     if body_name not in dictionary:
@@ -32,3 +34,17 @@ class Body:
 
     def add_orbitor(self, body):
         self.orbitors.append(body)
+
+
+def process_input(input_file):
+    orbit_map = read_input(input_file)
+    print(calculate_orbits_from_map(orbit_map))
+
+
+def read_input(input_file):
+    return [line.rstrip('\n') for line in open(input_file)]
+
+
+if __name__ == "__main__":
+    sys.setrecursionlimit(10000)
+    process_input(sys.argv[1])
