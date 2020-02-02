@@ -1,6 +1,6 @@
 import unittest
 
-from day5Part1 import Body, calculate_orbits, calculate_orbits_from_map
+from day6 import Body, calculate_orbits, calculate_orbits_from_map
 
 
 class MyTestCase(unittest.TestCase):
