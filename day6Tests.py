@@ -1,6 +1,7 @@
 import unittest
 
-from day6 import Body, calculate_orbits, calculate_orbits_from_map
+from day6 import Body, calculate_orbits, calculate_orbits_from_map, \
+    distance_to_santa
 
 
 class MyTestCase(unittest.TestCase):
@@ -44,6 +45,22 @@ class MyTestCase(unittest.TestCase):
             calculate_orbits_from_map(["COM)2", "2)3", "2)4"])
         )
 
+    def test_find_santa_distance_simple(self):
+        self.assertEqual(
+            0,
+            distance_to_santa(["COM)SAN", "COM)YOU"])
+        )
+
+    def test_find_santa_distance(self):
+        self.assertEqual(
+            2,
+            distance_to_santa([
+                "COM)A",
+                "COM)B",
+                "A)YOU",
+                "B)SAN"
+            ])
+        )
 
 if __name__ == '__main__':
     unittest.main()
