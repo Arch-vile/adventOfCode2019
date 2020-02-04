@@ -86,8 +86,8 @@ class Body:
 
 def process_input(input_file):
     orbit_map = read_input(input_file)
-    print(calculate_orbits_from_map(orbit_map))
-
+    # print(calculate_orbits_from_map(orbit_map))
+    print(distance_to_santa(orbit_map))
 
 def read_input(input_file):
     return [line.rstrip('\n') for line in open(input_file)]
